@@ -1,0 +1,11 @@
+{
+    "name": "anti asian speech Detector",
+    "description": "detect anti asian speech",
+    "version": "1.0",
+    "manifest_version": 3,
+
+    "permissions": [
+      "tabs",
+      "storage"
+    ]
+}
