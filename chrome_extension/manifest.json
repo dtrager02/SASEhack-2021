@@ -14,8 +14,8 @@
         // https://chromiumdash.appspot.com/commit/98c063ae403b2a03c75881523381e468da4c542b
         "service_worker": "service_worker.js"
     },
-    "content_scripts": {
+    "content_scripts": [{
         "matches": ["https://*/*"],
         "js": ["content/content-script.js"]
-    }
+    }]
 }
