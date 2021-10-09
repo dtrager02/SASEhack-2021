@@ -1,0 +1,14 @@
+{
+  "name": "fourchanscraper",
+  "version": "1.0.0",
+  "description": "Textscraper four 4chan, a site in which hate speech often runs rampant. Used to test nlp model evaluation",
+  "main": "scraper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jon Kouki Saathoff",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^10.4.0"
+  }
+}
