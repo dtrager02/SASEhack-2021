@@ -27,10 +27,13 @@ function reportSelectedText(data, tab) {
     sendReportSuccessToContentScript()
 }
 
-chrome.contextMenus.onClicked.addListener(reportSelectedText)
-
-chrome.contextMenus.create({
-    id: "report-text-clicked",
-    title: "Report: %s",
-    contexts: ["selection"]
+// we only need to bind to the content menu once after install
+chrome.runtime.onInstalled.addListener(() => {
+    chrome.contextMenus.create({
+        id: "report-text-clicked",
+        title: "Report: %s",
+        contexts: ["selection"]
+    })    
 })
+
+chrome.contextMenus.onClicked.addListener(reportSelectedText)

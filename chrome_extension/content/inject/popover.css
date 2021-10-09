@@ -1,0 +1,24 @@
+.api-ext-mouse-popover {
+    position: fixed; 
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em;
+    padding: 6px;
+    /* Make sure the element is on top of everything */
+    z-index: 999;
+    bottom: 0px;
+}
+
+.api-ext-mouse-popover-hidden {
+    display: none !important;
+}
+
+.api-ext-popover-success {
+    color: black;
+    background-color: rgb(104 255 104);
+}
+
+.api-ext-popover-fail {
+    color: black;
+    background-color: rgb(255, 165, 143);
+}
