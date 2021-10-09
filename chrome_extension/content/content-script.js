@@ -12,6 +12,7 @@ function createSendSuccessPopover() {
     messageElement.classList.remove("api-ext-mouse-popover-hidden");
     messageElement.classList.remove("api-ext-popover-fail");
     messageElement.classList.add("api-ext-popover-success");
+    messageElement.innerText = "Thank you for submitting data";
     
     setTimeout(() => {
         messageElement.classList.add("api-ext-mouse-popover-hidden"); 
@@ -23,6 +24,7 @@ function createSendFailPopover() {
     messageElement.classList.remove("api-ext-mouse-popover-hidden");
     messageElement.classList.remove("api-ext-popover-success");
     messageElement.classList.add("api-ext-popover-fail");
+    messageElement.innerText = "Failed to submit data";
     
     setTimeout(() => {
         messageElement.classList.add("api-ext-mouse-popover-hidden"); 
