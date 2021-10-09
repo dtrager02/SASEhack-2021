@@ -1,11 +1,21 @@
 {
-    "name": "anti asian speech Detector",
+    "name": "anti asian speech detector",
     "description": "detect anti asian speech",
     "version": "1.0",
     "manifest_version": 3,
 
     "permissions": [
       "tabs",
-      "storage"
-    ]
+      "storage",
+      "contextMenus"
+    ],
+    "background": {
+        // service worker moved to extension root for maximum browser compatibility (93.0 or below)
+        // https://chromiumdash.appspot.com/commit/98c063ae403b2a03c75881523381e468da4c542b
+        "service_worker": "service_worker.js"
+    },
+    "content_scripts": {
+        "matches": ["https://*/*"],
+        "js": ["content/content-script.js"]
+    }
 }
