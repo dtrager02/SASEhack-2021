@@ -1,4 +1,4 @@
-# Pinnacle 2021 - Crowd-sourced hate detection
+# SASEhack 2021 - Crowd-sourced hate detection
 ### Team Members
 
 
