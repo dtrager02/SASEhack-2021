@@ -1,57 +1,49 @@
-.back
-{
+.back{
     background-color:aliceblue;
 }
-.f1
-{
+.f1{
     font-family: Verdana, Geneva, Tahoma, sans-serif
-    
 }
-.small
-{
-    font-size: 10px
+.small{
+    font-size: 12px
 }
-#display
-{
+#display{
     width: 100%;
     height:300px;
-    border: 1px solid red;
-}
-.bout
-{   position: relative;
-}
-.column
-{
     
 }
-.big
-{
+.bout{   position: relative;
+}
+.big{
     font-size: 20px
 }
-.right
-{
+.right{
     background-color:lightcyan;
 }
-.navbar
-{
+.navbar{
     background-color: white;
     margin: 0;  
 }
-
-.line
-{
-    style="width:100% height: 10px;"
-}
-.column {
-    float: left;
-    width: 50%;
+table, th, td{
+    border: 1px solid black;
   }
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
+  th
+  {
+      background-color: #70C8FC ;
+  }
+  tr:nth-child(even)
+  { background-color: #E0ECFA;}
+  tr:nth-child(odd)
+  { background-color: #E1FFFF;}
+  table{
+      table-layout: fixed;
+      width:100%
+      
+  }
+
+.column{
+    float: left;
+    width: 100%;
   }
 
 
