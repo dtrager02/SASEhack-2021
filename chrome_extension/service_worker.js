@@ -1,4 +1,4 @@
-const SERVER_ADDR = "http://localhost:8082";
+const SERVER_ADDR = "http://137.184.111.100:8080";
 
 function sendReportStatusToContentScript(isError) {
     // We assume the current active tab is 
