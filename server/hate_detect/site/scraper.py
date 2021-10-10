@@ -21,3 +21,4 @@ def scrape():
             'message': item
         })
     print(scrapedtext)
+    return scrapedtext
