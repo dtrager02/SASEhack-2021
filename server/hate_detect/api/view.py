@@ -36,4 +36,4 @@ def fourChan():
     predictions = NLP.predict(get_model(),texts)
     #predictions format:
     #table:[texts array,predictions array)]
-    return APIResponse.success(ScrapedData(True,predictions))
+    return APIResponse.success(ScrapedData(True,predictions)).make()

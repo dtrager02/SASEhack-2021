@@ -4,7 +4,7 @@ getScrapedData = () => {
     $.ajax({
         async: false,
         type: 'GET',
-        url: '/content/update',
+        url: 'api/content/update',
         success: function(data) {
             temp = data['table'];
         }
