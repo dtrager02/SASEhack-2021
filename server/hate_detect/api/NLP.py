@@ -1,7 +1,7 @@
 from numpy import DataSource
 from numpy import array
 import numpy
-from convert import csv_to_dataset
+from hate_detect.api.convert import csv_to_dataset
 from sklearn.model_selection import train_test_split
 #efficient version
 from sklearn.feature_extraction.text import CountVectorizer
@@ -41,9 +41,8 @@ def train_model(connection):
     text_clf_svm = text_clf_svm.fit(X_train,y_train)
     return text_clf_svm
 
-def predict(model,text_JSON): 
-    if text_JSON.get("isError",0):
-        return None
-    body = text_JSON["message"]
-    predictions = [model.predict_proba(x) for x in text_JSON["messages"]]
-    return predictions
+def predict(model,texts): 
+    predictions = model.predict_proba(texts)
+    #format
+    #[(4chan text,predictions),...]
+    return {"table":list(zip(texts,predictions))}

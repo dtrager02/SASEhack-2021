@@ -1,10 +1,12 @@
-function sendReportSuccessToContentScript() {
+const SERVER_ADDR = "http://localhost:8082";
+
+function sendReportStatusToContentScript(isError) {
     // We assume the current active tab is 
     // where the reported message coming from
     chrome.tabs.query({active: true, currentWindow: true}).then(
 
         (tabs) => {
-            chrome.tabs.sendMessage(tabs[0].id, {type: "reportMessage", success: true}, 
+            chrome.tabs.sendMessage(tabs[0].id, {type: "reportMessage", success: isError}, 
                 (response) => {
                     console.log(`Response from Content Script: ${response}`);
             });
@@ -22,9 +24,26 @@ function sendReportSuccessToContentScript() {
  * @param {chrome.tabs.Tab} tab 
  */
 function reportSelectedText(data, tab) {
-    console.log(data.selectionText)
+    const apiEndpoint = `${SERVER_ADDR}/api/hate/model/add?text=${data.selectionText}`
 
-    sendReportSuccessToContentScript()
+    fetch(apiEndpoint, {
+        method: "post"
+    })
+    .then(json => json)
+    .then((data) => {
+        let parsed = JSON.parse(data);
+        if (parsed.isError || !parsed.response.success)
+        {
+            sendReportStatusToContentScript(true);
+        }
+        else
+        {
+            sendReportStatusToContentScript(false);
+        }
+    })
+    .catch((error) => {
+        sendReportStatusToContentScript(true);
+    });
 }
 
 // we only need to bind to the content menu once after install

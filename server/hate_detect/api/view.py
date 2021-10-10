@@ -1,10 +1,10 @@
 from os import truncate
 from re import A
+import hate_detect.api.NLP as NLP
 from flask import Blueprint, request
 from hate_detect.shared.db import get_db
 import datetime
 
-from hate_detect.api.api_response import APIResponse, AddData, DetectSpeech
 from hate_detect.site.scraper import scrape
 from hate_detect.api.api_response import APIResponse, AddData, DetectSpeech, ScrapedData
 
@@ -30,6 +30,10 @@ def detect_text():
 
     return APIResponse.success(DetectSpeech(True, 1.3)).make()
 
-@api.route('/content/update')
+@api.route('/api/content/update')
 def fourChan():
-    return APIResponse.success(ScrapedData(True,scrape()))
+    texts = [i["message"] for i in scrape()["posts"]]
+    predictions = NLP.predict(texts)
+    #predictions format:
+    #table:[texts array,predictions array)]
+    return APIResponse.success(ScrapedData(True,predictions))
