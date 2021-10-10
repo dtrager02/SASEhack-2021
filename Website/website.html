@@ -16,9 +16,9 @@
     <a href="#home" style="color: black;" class="name-button"><b>SASE Hack </b> Smartest ⑨</a>
     <!-- Float links to the right. Hide them on small screens -->
     <div class="right small">
-      <a href="#display" class="button">Display</a>
-      <a href="#about" class="button">About</a>
-      <a href="#comments" class="button">Comments</a>
+      <a href="#display" style="color: black;"class="button">Display</a>
+      <a href="#about" style="color: black;"class="button">About</a>
+      <a href="#comments" style="color: black;" class="button">Comments</a>
     </div>
   </div>
 </div>
@@ -33,6 +33,15 @@
 
 <div>
 
+  <!-- About Section -->
+  <div class="" id="about">
+    <h3 class="h123">About</h3>
+    <hr> 
+    <p class="txtt">
+      It has been a tough year for everyone in 2021, especially for the Asian Pacific Islander (API) community, so what could we have done to stop API hate? Well we implemented machine learning to detect if 4chan messages are hateful based on a confidence rating of 0 to 1, with 1 being most confident it is hate speech and 0 being no signs of hate speech. <a href="https://github.com/dtrager02/SASEhack-2021">(Github)</a>
+    </p>
+  </div>
+
   <!-- Display Section -->
   <div class="disp" id="display">
     <h3 class="">Display</h3>
@@ -41,8 +50,8 @@
       <table class="center main_table" id="tab" cellpadding=6 cellspacing=0 >
         <thead>
         <tr>
-        <th> 4chan Posts</th>
-        <th> Output</th>
+        <th> Most Recent 4Chan Posts</th>
+        <th> Hate Confidence</th>
         </tr>
       </thead>
       <tbody>
@@ -66,20 +75,77 @@
           <td>foobar</td>
           <td>.9</td>
         </tr>
+        <tr>
+          <td>banana</td>
+          <td>.3</td>
+        </tr>
+        <tr>
+          <td>foobar</td>
+          <td>.2</td>
+        </tr>
+        <tr>
+          <td>foobar</td>
+          <td>.7</td>
+        </tr>
+        <tr>
+          <td>foobar</td>
+          <td>.9</td>
+        </tr>
+        <tr>
+          <td>banana</td>
+          <td>.3</td>
+        </tr>
+        <tr>
+          <td>foobar</td>
+          <td>.2</td>
+        </tr>
+        <tr>
+          <td>foobar</td>
+          <td>.7</td>
+        </tr>
+        <tr>
+          <td>foobar</td>
+          <td>.9</td>
+        </tr>
+        <tr>
+          <td>banana</td>
+          <td>.3</td>
+        </tr>
+        <tr>
+          <td>foobar</td>
+          <td>.2</td>
+        </tr>
+        <tr>
+          <td>foobar</td>
+          <td>.7</td>
+        </tr>
+        <tr>
+          <td>foobar</td>
+          <td>.9</td>
+        </tr>
+        <tr>
+          <td>banana</td>
+          <td>.3</td>
+        </tr>
+        <tr>
+          <td>foobar</td>
+          <td>.2</td>
+        </tr>
+        <tr>
+          <td>foobar</td>
+          <td>.7</td>
+        </tr>
+        <tr>
+          <td>foobar</td>
+          <td>.9</td>
+        </tr>
         </tbody>
       </table>
       
   </div>
   </div>
 
-  <!-- About Section -->
-  <div class="" id="about">
-    <h3 class="h123">About</h3>
-    <hr> 
-    <p>
-      much wow
-    </p>
-  </div>
+  
 
   
 
@@ -88,12 +154,9 @@
     <h3 class="">Comments</h3>
     <hr> 
     <p>Any comments?</p>
-    <form action="/action_page.php" target="_blank">
-      <input class="" type="text" placeholder="Comments?" required name="Comment">
-      <button class="" type="submit">
-        <i class=""></i> SEND MESSAGE
-      </button>
-    </form>
+      <input id="val1" class="" type="text" placeholder="Comments?" required name="Comment">
+      <input type="button" value="Submit" onclick="clickfun()">
+       
   </div>
   
 

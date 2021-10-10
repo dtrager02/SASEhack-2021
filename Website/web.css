@@ -12,16 +12,20 @@
     height:300px;
     
 }
+.txtt{
+    font-size: 22px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 .bout{   position: relative;
 }
 .big{
-    font-size: 20px
+    font-size: 20px;
 }
 .right{
     background-color:lightcyan;
 }
 .navbar{
-    background-color: white;
+    background-color: lightgray;
     margin: 0;  
 }
 table, th, td{
