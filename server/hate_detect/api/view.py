@@ -1,5 +1,6 @@
 from os import truncate
 from re import A
+import NLP
 from flask import Blueprint, request
 from hate_detect.shared.db import get_db
 from hate_detect.site.scraper import scrape
@@ -29,4 +30,8 @@ def detect_text():
 
 @api.route('/content/update')
 def fourChan():
-    return APIResponse.success(ScrapedData(True,scrape()))
+    texts = [i["message"] for i in scrape()["posts"]]
+    predictions = NLP.predict(texts)
+    #predictions format:
+    #table:[texts array,predictions array)]
+    return APIResponse.success(ScrapedData(True,predictions))

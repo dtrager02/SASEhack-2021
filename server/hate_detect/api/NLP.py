@@ -41,9 +41,10 @@ def train_model(connection):
     text_clf_svm = text_clf_svm.fit(X_train,y_train)
     return text_clf_svm
 
-def predict(model,text_JSON): 
-    if text_JSON.get("isError",0):
-        return None
-    body = text_JSON["message"]
-    predictions = [model.predict_proba(x) for x in text_JSON["messages"]]
-    return predictions
+def predict(model,texts): 
+    predictions = model.predict_proba(texts)
+    #EXAMPLE:
+    #i hate blacks      1.0,0
+    #i hate whites      0.8,0
+    #i hate asians      0.9,0
+    return {"table":[texts,predictions]}
