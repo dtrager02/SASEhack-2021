@@ -1,7 +1,7 @@
 from numpy import DataSource
 from numpy import array
 import numpy
-from convert import csv_to_dataset
+from hate_detect.api.convert import csv_to_dataset
 from sklearn.model_selection import train_test_split
 #efficient version
 from sklearn.feature_extraction.text import CountVectorizer
@@ -43,8 +43,6 @@ def train_model(connection):
 
 def predict(model,texts): 
     predictions = model.predict_proba(texts)
-    #EXAMPLE:
-    #i hate blacks      1.0,0
-    #i hate whites      0.8,0
-    #i hate asians      0.9,0
-    return {"table":[texts,predictions]}
+    #format
+    #[(4chan text,predictions),...]
+    return {"table":list(zip(texts,predictions))}

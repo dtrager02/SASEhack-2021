@@ -1,5 +1,6 @@
 getScrapedData = () => {
     console.log("got data");
+    temp = {};
     $.ajax({
         async: false,
         type: 'GET',
@@ -8,6 +9,7 @@ getScrapedData = () => {
             temp = data['table'];
         }
     });
+    console.log(temp)
     return temp;
 };
 
@@ -24,7 +26,10 @@ createTable = (columns) => {
 }
 
 repeat = () =>{
-    columns = getScrapedData;
+    console.log("entered repeat")
+    columns = getScrapedData();
     createTable(columns);
 };
+console.log("started");
+repeat();
 setInterval(repeat,30000);
