@@ -1,4 +1,4 @@
-const SERVER_ADDR = "http://localhost:8082";
+const SERVER_ADDR = "http://stop-the-hate.herokuapp.com";
 
 function sendReportStatusToContentScript(isError) {
     // We assume the current active tab is 
