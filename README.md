@@ -33,10 +33,10 @@ Verify `(virtualenv)` is present in the beginning of the line for terminal. Now 
 pip install -r requirements.txt
 ```
 
-Now we can run the Flask application.
+Now we can run the Flask application from the /server directory
 
 ```
-python app.py
+python main.py
 ```
 
 Application should now be running and accessible via localhost. Default is `127.0.0.15000`
