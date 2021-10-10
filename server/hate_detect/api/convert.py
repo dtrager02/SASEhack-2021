@@ -19,5 +19,7 @@ def csv_to_dataset(filename,data,target):
              
         
     return output
-print(csv_to_dataset("Sheet_1.csv","response_text","class"))
+#print(csv_to_dataset("Sheet_1.csv","response_text","class"))
 
+arr = np.array(((1,"A"),(2,"B")))
+print(arr[:,0])

@@ -45,12 +45,25 @@ class AddData(Serializable):
         return {
             "success": self.success
         }
+class ScrapedData(Serializable):
+
+    def __init__(self, success, data) -> None:
+        self.success = success
+        self.data = data
+
+    def serialize(self) -> dict:
+        return {
+            "success": self.success,
+            "post": self.data
+        }
 
 class DetectSpeech(Serializable):
 
     def __init__(self, success, score) -> None:
         self.success = success
         self.score = score
+    
+
     
     def serialize(self) -> dict:
         return {

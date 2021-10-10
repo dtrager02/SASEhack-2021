@@ -2,8 +2,8 @@ from os import truncate
 from re import A
 from flask import Blueprint, request
 from hate_detect.shared.db import get_db
-
-from hate_detect.api.api_response import APIResponse, AddData, DetectSpeech
+from hate_detect.site.scraper import scrape
+from hate_detect.api.api_response import APIResponse, AddData, DetectSpeech, ScrapedData
 
 api = Blueprint("api", __name__)
 
@@ -24,4 +24,9 @@ def add_data_to_model():
 
 @api.route("hate/model/detect", methods=["GET", "POST"])
 def detect_text():
+
     return APIResponse.success(DetectSpeech(True, 1.3)).make()
+
+@api.route('/content/update')
+def fourChan():
+    return APIResponse.success(ScrapedData(True,scrape()))
