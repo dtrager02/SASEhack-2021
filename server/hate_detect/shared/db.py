@@ -8,6 +8,6 @@ def get_db():
     db = getattr(g, '_database', None)
     if db is None:
         db = g._database = sqlite3.connect(DATABASE)
-        # db.cursor().execute(r"CREATE TABLE data (text TEXT, isHate INTEGER)")
+        db.cursor().execute(r"CREATE TABLE IF EXISTS data (text TEXT, isHate INTEGER)")
         db.commit()
     return db
