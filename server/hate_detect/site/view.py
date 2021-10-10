@@ -9,4 +9,4 @@ site = Blueprint("site", __name__, template_folder="template",
 
 @site.route("/")
 def index():
-    return str(get_db().cursor().execute("SELECT text, isHate FROM data ORDER BY date DESC LIMIT 5000").fetchall())
+    return render_template("index.html")

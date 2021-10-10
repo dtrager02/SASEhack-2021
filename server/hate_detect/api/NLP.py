@@ -10,6 +10,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.linear_model import SGDClassifier
+import re
 
 import nltk
 # nltk.download()
@@ -32,7 +33,7 @@ def train_model(connection):
     #X_train, X_test, y_train, y_test = train_test_split(data["data"], data["target"], test_size=0.33, random_state=42)
     lemmatizer = WordNetLemmatizer()
     data = numpy.array(connection.cursor().execute("select text,isHate from data order by date desc limit 5000").fetchall())
-    print(data)
+    #print(data)
     X_train, X_test, y_train, y_test = train_test_split(data[:,0], data[:,1], test_size=0.33, random_state=42)
     # lemmatizer = WordNetLemmatizer()
     # stemmer = SnowballStemmer("english", ignore_stopwords=True)
@@ -48,9 +49,23 @@ def train_model(connection):
     model=calibrator.fit(X_train, y_train)
     return model
 
+def is_bad_word(w,bads=set()):
+    half = int(len(w.group(0))/2)
+    if w.group(0) in bads:
+        print(w.group(0))
+        return w.group(0).replace(w.group(0)[0:half],half*'*')
+    return w.group(0)
+
+
+
 def predict(model,texts): 
     predictions = model.predict_proba(texts)
-    print(predictions)
+    print("ran predictions")
+    with open("./hate_detect/api/curses.txt") as f:
+        badWords = set(map(str.strip,f.readlines()))
+        print(badWords)
+        for i in range(len(texts)):
+            texts[i] = re.sub(r'[^\s]+', lambda w: is_bad_word(w,bads=badWords), texts[i])
     #format
     #[(4chan text,predictions),...]
     return {"table":list(zip(list(texts),[i[1] for i in predictions]))}

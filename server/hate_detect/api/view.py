@@ -2,7 +2,7 @@ from os import truncate
 from re import A
 import hate_detect.api.NLP as NLP
 from flask import Blueprint, request
-from hate_detect.shared.db import get_db, get_model
+from hate_detect.shared.db import get_db, get_model,update_added_count
 import datetime
 
 from hate_detect.site.scraper import scrape
@@ -22,6 +22,7 @@ def add_data_to_model():
     cursor = db.cursor()
     cursor.execute("INSERT INTO data (text, isHate, date) VALUES(?, ?, ?)", (text, True, datetime.datetime.now()))
     db.commit()
+    update_added_count()
     
     return APIResponse.success(AddData(True)).make()
 

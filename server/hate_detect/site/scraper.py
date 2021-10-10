@@ -5,7 +5,7 @@ import json
 
 
 def scrape():
-    link = 'https://boards.4channel.org/v/'
+    link = 'https://boards.4channel.org/pol/'
     page = requests.get(link)
 
     soup = BeautifulSoup(page.content, 'html.parser')
@@ -20,5 +20,5 @@ def scrape():
         scrapedtext['posts'].append({
             'message': item
         })
-    print(scrapedtext)
+    # print(scrapedtext)
     return scrapedtext

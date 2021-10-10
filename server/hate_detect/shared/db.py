@@ -14,9 +14,20 @@ def get_db():
 
 
 
-def get_model():
+def get_model(retrain = False):
     model = getattr(g, '_model', None)
-    if model is None:
+    if model is None or retrain:
         MODEL = NLP.train_model(get_db())
         model = g._model = MODEL
+        print("trained model")
     return model
+
+def update_added_count():
+    db = get_db()
+    count = getattr(g,"_count",0)
+    g._count += 1
+    if(count%10):
+        get_model(retrain = True)
+    
+
+    

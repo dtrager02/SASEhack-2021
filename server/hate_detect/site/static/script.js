@@ -1,4 +1,4 @@
-getScrapedData = () => {
+getScrapedData = (callback) => {
     console.log("got data");
     temp = {};
     $.ajax({
@@ -6,29 +6,31 @@ getScrapedData = () => {
         type: 'GET',
         url: 'api/content/update',
         success: function(data) {
-            temp = data['table'];
+            callback(data['response']['post']['table']);
         }
     });
-    console.log(temp)
-    return temp;
 };
 
 createTable = (columns) => {
-    results = `<table><tr>
-    <th>4 chan message<\th>
-    <th>predictions<\th>
-    <\tr>`;
-    resultsEnd = "</table>";
-    columns.forEach((row) => { results += `<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`
-    }); //inserts div for each matching anime from database
-    results += resultsEnd;
-    $('.main_table').html(results);
+    columns.forEach((row) => {$(".main_table > tbody").append(`<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`)
+    }); 
 }
 
 repeat = () =>{
     console.log("entered repeat")
-    columns = getScrapedData();
-    createTable(columns);
+    getScrapedData((columns) => {
+        $(".main_table > tbody").html("");
+        createTable(columns);
+        $(".main_table tr").each(function(){
+            let num = parseFloat($(this).find("td").eq(1).text());
+            if(num > .6 || num <.4){
+            $(this).find("td").eq(1).css("background-color",`rgb(${parseInt((num)*255)},${parseInt((1-num)*255)},0,.5)`);
+            console.log(num);
+        } else {
+            $(this).find("td").eq(1).css("background-color",`rgb(150,150,150,.8)`);
+        }
+        });
+    });
 };
 console.log("started");
 repeat();
