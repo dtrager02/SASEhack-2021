@@ -50,8 +50,8 @@ def standarize():
                 file.write(f"{line}\n")
 
 def strip_html_emoji():
-    re_expr = re.compile("&#\d{6};")
-    with open("dataset_clean.csv", "r", encoding="utf-8") as file:
+    re_expr = re.compile("&#\d{4,8};")
+    with open("dataset_clean_v2.csv", "r", encoding="utf-8") as file:
         data = []
         for line in file:
             d = re_expr.sub("", line)
@@ -59,6 +59,31 @@ def strip_html_emoji():
 
         with open("dataset_clean_v3.csv", "w", encoding="utf-8") as file:
             for entry in data:
+                file.write(f"{entry}")
+
+def clean_ascii():
+    with open("dataset_clean_v3.csv", "r", encoding="utf-8") as file:
+        data = []
+        for line in file:
+            ln = line.replace('"', '').replace("'", "").strip().strip()
+            data.append(ln)
+
+        with open("dataset_clean_v4.csv", "w", encoding="utf-8") as file:
+            for entry in data:
                 file.write(f"{entry}\n")
 
-strip_html_emoji()
+def restructure_quotes():
+    with open("dataset_clean_v4.csv", "r", encoding="utf-8") as file:
+        data = []
+        for line in file:
+            text = line.split(",")[6:]
+            ln = line.split(",")[:6]
+            text_join = ",".join(text).strip()
+            ln.append(f"\"{text_join}\"")
+            data.append(ln)
+
+        with open("dataset_clean_v5.csv", "w", encoding="utf-8") as file:
+            for entry in data:
+                file.write(f"{','.join(entry)}\n")
+
+restructure_quotes()
