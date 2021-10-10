@@ -1,4 +1,6 @@
 from numpy import DataSource
+from numpy import array
+import numpy
 from convert import csv_to_dataset
 from sklearn.model_selection import train_test_split
 #efficient version
@@ -25,8 +27,8 @@ def train_model(connection):
     #data = csv_to_dataset("Sheet_1.csv","response_text","class")
     #X_train, X_test, y_train, y_test = train_test_split(data["data"], data["target"], test_size=0.33, random_state=42)
     lemmatizer = WordNetLemmatizer()
-    data = connection.execute("select text,isHate from data order by date desc limit 5000")
-    X_train, X_test, y_train, y_test = train_test_split(data["data"], data["target"], test_size=0.33, random_state=42)
+    data = numpy.array(connection.execute("select text,isHate from data order by date desc limit 5000").fetchall())
+    X_train, X_test, y_train, y_test = train_test_split(data[:,0], data[:,1], test_size=0.33, random_state=42)
     lemmatizer = WordNetLemmatizer()
     stemmer = SnowballStemmer("english", ignore_stopwords=True)
     stemmed_count_vect = StemmedCountVectorizer(stop_words='english',ngram_range=(1,2))
