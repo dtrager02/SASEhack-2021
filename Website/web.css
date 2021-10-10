@@ -1,11 +1,19 @@
+/** random terrible formatting **/
+
 .back{
-    background-color:aliceblue;
+    
+    background-image: url("https://i.pinimg.com/564x/76/62/c1/7662c18b9b3ac3a32465dab90e562770.jpg");
+    background-size: 100% 100%;
+}
+.marg{
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .f1{
     font-family: Verdana, Geneva, Tahoma, sans-serif
 }
 .small{
-    font-size: 12px
+    font-size: 100%;
 }
 #display{
     width: 100%;
