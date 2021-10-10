@@ -1,6 +1,7 @@
 import requests
 import re
 from bs4 import BeautifulSoup
+import json
 
 
 def scrape():
@@ -11,6 +12,12 @@ def scrape():
 
     results = soup.find_all('blockquote', class_ = 'postMessage')
 
+    scrapedtext = {}
+    scrapedtext['posts'] = []  
+    
     for item in results:
         item = re.sub(r'(>>\d{9})','', item.text)
-        print(item)
+        scrapedtext['posts'].append({
+            'message': item
+        })
+    print(scrapedtext)
