@@ -3,6 +3,9 @@ from re import A
 import NLP
 from flask import Blueprint, request
 from hate_detect.shared.db import get_db
+import datetime
+
+from hate_detect.api.api_response import APIResponse, AddData, DetectSpeech
 from hate_detect.site.scraper import scrape
 from hate_detect.api.api_response import APIResponse, AddData, DetectSpeech, ScrapedData
 
@@ -18,7 +21,7 @@ def add_data_to_model():
     db = get_db()
     # TODO: SQL INJECTION DANGER
     cursor = db.cursor()
-    cursor.execute(f"INSERT INTO data (text, isHate) VALUES(\"{text}\" ,true)")
+    cursor.execute("INSERT INTO data (text, isHate, date) VALUES(?, ?, ?)", (text, True, datetime.datetime.now()))
     db.commit()
     
     return APIResponse.success(AddData(True)).make()
