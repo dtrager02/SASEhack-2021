@@ -11,7 +11,7 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.linear_model import SGDClassifier
 import re
-
+from thefuzz import fuzz
 import nltk
 # nltk.download()
 from nltk.stem.snowball import SnowballStemmer
@@ -53,7 +53,7 @@ def is_bad_word(w,bads=set()):
     half = int(len(w.group(0))/2)
     if w.group(0) in bads:
         print(w.group(0))
-        return w.group(0).replace(w.group(0)[0:half],half*'*')
+        return w.group(0).lower().replace(w.group(0)[0:half],half*'*')
     return w.group(0)
 
 
@@ -63,9 +63,13 @@ def predict(model,texts):
     print("ran predictions")
     with open("./hate_detect/api/curses.txt") as f:
         badWords = set(map(str.strip,f.readlines()))
-        print(badWords)
+        #\b(?:one|two|three)\b
+        #[a-zA-Z]+?
+        joined = "|".join(list(badWords))
+        regex = re.compile(rf'(?:{joined})((s|ing|ed)\b|\b)',re.IGNORECASE)
+        #print(badWords)
         for i in range(len(texts)):
-            texts[i] = re.sub(r'[^\s]+', lambda w: is_bad_word(w,bads=badWords), texts[i])
+            texts[i] = re.sub(regex, lambda w: is_bad_word(w,bads=badWords), texts[i])
     #format
     #[(4chan text,predictions),...]
     return {"table":list(zip(list(texts),[i[1] for i in predictions]))}
